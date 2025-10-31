@@ -16,6 +16,7 @@
 
 	let index = 0;
 	const answers = new Array(data.questions.length).fill(null);
+	let showingFeedback = false; // чи зараз показуємо correct/incorrect
 
 	function render() {
 		const q = data.questions[index];
@@ -37,28 +38,69 @@
 		});
 		prevBtn.disabled = index === 0;
 		nextBtn.textContent = index === data.questions.length - 1 ? 'Завершити' : 'Далі';
-		const pct = Math.round((index / data.questions.length) * 100);
+		// прогрес: показуємо відсоток пройдених питань (1-based), щоб перше питання не було 0%
+		const pct = Math.round(((index + 1) / data.questions.length) * 100);
 		progressBar.style.width = pct + '%';
 	}
 
 	function select(optionIdx) {
+		if (showingFeedback) return; // ігноруємо клацання під час показу фідбеку
 		answers[index] = optionIdx;
 		Array.from(choicesEl.children).forEach(li => {
 			li.classList.toggle('selected', Number(li.dataset.index) === optionIdx);
 		});
 	}
 
-	prevBtn.addEventListener('click', () => { if (index > 0) { index--; render(); } });
+	function clearFeedback() {
+		Array.from(choicesEl.children).forEach(li => {
+			li.classList.remove('correct', 'incorrect');
+		});
+	}
+
+	function revealAnswer() {
+		const q = data.questions[index];
+		if (!q) return;
+		const correctIdx = Number(q.answer);
+		Array.from(choicesEl.children).forEach(li => {
+			const i = Number(li.dataset.index);
+			if (i === correctIdx) {
+				li.classList.add('correct');
+			} else if (answers[index] === i) {
+				li.classList.add('incorrect');
+			}
+		});
+	}
+
+	prevBtn.addEventListener('click', () => { if (index > 0 && !showingFeedback) { index--; render(); } });
 	nextBtn.addEventListener('click', () => {
-		if (index < data.questions.length - 1) { index++; render(); return; }
-		// завершення — підрахунок
-		let correct = 0;
-		data.questions.forEach((q, i) => { if (answers[i] === q.answer) correct++; });
-		document.getElementById('question-card').classList.add('hidden');
-		resultsEl.classList.remove('hidden');
-		resultsEl.setAttribute('aria-hidden', 'false');
-		scoreEl.textContent = correct + ' / ' + data.questions.length;
-		summaryEl.textContent = 'Ви відповіли правильно на ' + correct + ' з ' + data.questions.length + ' питань.';
+		if (showingFeedback) return; // запобігти мульти-натисканням
+		const last = index === data.questions.length - 1;
+		// Показати фідбек (correct/incorrect) перед переходом
+		revealAnswer();
+		showingFeedback = true;
+		// тимчасово вимикаємо кнопки
+		prevBtn.disabled = true;
+		nextBtn.disabled = true;
+		setTimeout(() => {
+			clearFeedback();
+			showingFeedback = false;
+			// відновити доступність кнопок
+			prevBtn.disabled = index === 0;
+			nextBtn.disabled = false;
+			if (!last) {
+				index++;
+				render();
+				return;
+			}
+			// якщо це останнє питання — показ результатів
+			let correct = 0;
+			data.questions.forEach((q, i) => { if (answers[i] === q.answer) correct++; });
+			document.getElementById('question-card').classList.add('hidden');
+			resultsEl.classList.remove('hidden');
+			resultsEl.setAttribute('aria-hidden', 'false');
+			scoreEl.textContent = correct + ' / ' + data.questions.length;
+			summaryEl.textContent = 'Ви відповіли правильно на ' + correct + ' з ' + data.questions.length + ' питань.';
+		}, 900); // пауза для перегляду фідбеку
 	});
 
 	document.getElementById('restart-btn').addEventListener('click', () => {
