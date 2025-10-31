@@ -249,5 +249,8 @@ body{
 /* Коротка секція для стилізації помилок/логів (розробка) */
 .dev-border{border:1px dashed rgba(15,23,42,0.05)}
 
+/* Клас для прихованого тексту (екранні рідери) */
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
 /* Кінець файлу */
 
