@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testikXD — Квіз</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title">testikXD</h1>
+      <nav class="site-nav" aria-label="Головна навігація">
+        <ul>
+          <li><a href="#" data-link="home">Головна</a></li>
+          <li><a href="#" data-link="quiz" class="active">Квіз</a></li>
+          <li><a href="#" data-link="about">Про проєкт</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="quiz-container" id="quiz" aria-live="polite">
+    <header class="quiz-header">
+      <h2 id="quiz-title">Квіз</h2>
+      <p id="quiz-desc">Відповідайте на питання — в кінці отримаєте результат.</p>
+    </header>
+
+    <section class="quiz-progress" aria-hidden="false">
+      <div class="progress-info">
+        <span id="current">1</span> / <span id="total">0</span>
+      </div>
+      <progress id="progress" value="0" max="100"></progress>
+    </section>
+
+    <section class="quiz-question" id="question-area">
+      <form id="question-form" autocomplete="off">
+        <fieldset id="q-fieldset">
+          <legend id="question-text">Питання з'явиться тут</legend>
+          <ul id="options" class="options" role="radiogroup" aria-labelledby="question-text">
+            <!-- Варіанти генеруються скриптом -->
+          </ul>
+        </fieldset>
+      </form>
+    </section>
+
+    <nav class="quiz-controls">
+      <button id="prev-btn" class="btn" type="button" aria-label="Попереднє питання" disabled>Назад</button>
+      <button id="next-btn" class="btn primary" type="button" aria-label="Наступне питання">Далі</button>
+    </nav>
+
+    <section id="result" class="quiz-result" hidden>
+      <h3>Результат</h3>
+      <p id="score-text">Ви набрали <strong id="score">0</strong> з <span id="max-score">0</span></p>
+      <div id="detailed-feedback"></div>
+      <button id="restart-btn" class="btn" type="button">Пройти ще раз</button>
+    </section>
+
+    <script type="application/json" id="quiz-data">
+    {
+      "title": "Приклад квізу",
+      "description": "Відповідайте на запитання",
+      "questions": [
+        {
+          "text": "Який колір неба?",
+          "options": ["Червоний","Синій","Зелений","Жовтий"],
+          "answer": 1
+        },
+        {
+          "text": "2 + 2 = ?",
+          "options": ["3","4","5","22"],
+          "answer": 1
+        }
+      ]
+    }
+    </script>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
