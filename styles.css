@@ -1,256 +1,242 @@
-/* styles.css — структура стилів для квізу
-   Коментарі українською. Використовуйте класи у HTML відповідно до імен.
-   Основні блоки:
-   - .quiz-container: загальний контейнер
-   - .quiz-header: заголовок/титул
-   - .question-card: окрема картка питання
-   - .choices: список варіантів
-   - .choice: кнопка/рядок варіанту
-   - .progress / .progress-bar: індикатор прогресу
-   - .timer: таймер
-   - .results: екран результатів
-*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-:root{
-  /* кольори */
-  --bg: #f7f9fc;
-  --card-bg: #ffffff;
-  --primary: #3b82f6; /* блакитний */
-  --accent: #d7dbdc; /* акцент */
-  --success: #16a34a;
-  --danger: #ef4444;
-  --muted: #6b7280;
+:root {
+  --font-heading: 'Baloo 2', cursive;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --bg-1: #FFF8F3;
+  --card: #FFFFFF;
+  --primary: #4CC9F0;
+  --primary-2: #31b7dc;
+  --accent: #FF6B6B;
+  --purple: #A78BFA;
+  --muted: #6B7280;
   --text: #0f172a;
-
-  /* розміри */
+  --radius-xl: 22px;
+  --radius-lg: 14px;
   --radius: 10px;
-  --gap: 1rem;
-  --max-width: 780px;
-
-  /* шрифти */
-  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --shadow-1: 0 8px 22px rgba(35,37,47,0.08);
+  --shadow-2: 0 18px 40px rgba(35,37,47,0.10);
+}
+body {
+  font-family: var(--font-body);
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(123,228,149,0.06), transparent 8%),
+              radial-gradient(900px 500px at 90% 90%, rgba(167,139,250,0.05), transparent 10%),
+              var(--bg-1);
+  color: var(--text);
+  padding: 20px;
 }
 
-/* Базовий ресет */
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:var(--font-sans);
-  background:linear-gradient(180deg, var(--bg), #eef2f7);
-  color:var(--text);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  line-height:1.45;
-  padding:2rem 1rem;
+h1, h2{
+  font-family: var(--font-heading);
 }
 
-/* Центрування головного контейнера */
+/* Page layout: centered greeting and actions */
 .quiz-container{
-  max-width:var(--max-width);
-  margin:0 auto;
-  display:flex;
-  flex-direction:column;
-  gap:var(--gap);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Заголовок квізу */
-.quiz-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:1rem;
-}
-.quiz-title{
-  font-size:1.5rem;
-  font-weight:700;
-}
-.quiz-meta{
-  color:var(--muted);
-  font-size:0.95rem;
+.title{
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  margin: 0;
+  text-align: center;
+  white-space: normal; /* allow wrapping if needed */
 }
 
-/* Верхня панель: прогрес та таймер */
-.topbar{
-  display:flex;
-  align-items:center;
-  gap:0.75rem;
-}
-.progress{
-  flex:1;
-  background:rgba(15,23,42,0.06);
-  height:10px;
-  border-radius:999px;
-  overflow:hidden;
-}
-.progress-bar{
-  height:100%;
-  background:linear-gradient(90deg,var(--primary),var(--accent));
-  width:0%; /* змінюється через JS */
-  transition:width 400ms ease;
-}
-.timer{
-  min-width:72px;
-  text-align:right;
-  color:var(--muted);
-  font-weight:600;
+.actions{display:flex;gap:0.6rem;margin-top:12px}
+
+/* Button base */
+.btn{font-family:var(--font-body);font-weight:700;padding:0.7rem 1.05rem;border-radius:999px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:0.5rem;transition:transform .14s ease,box-shadow .14s ease;box-shadow:var(--shadow-1)}
+.btn:focus{outline:3px solid rgba(76,201,240,0.16);outline-offset:3px}
+.btn:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(35,37,47,0.12)}
+
+/* Primary and accent */
+.createquizbutton, .btn-primary{background:linear-gradient(180deg,var(--primary),var(--primary-2));color:#fff}
+.randomquizbutton, .btn-accent{background:linear-gradient(90deg,var(--accent),var(--purple));color:#fff}
+
+/* Container */
+.quiz-container{max-width:1100px;margin:0 auto}
+
+/* small utilities */
+.hero-illustration{width:320px;height:200px;border-radius:16px;background:linear-gradient(180deg,#fff,#fff6ff);box-shadow:0 18px 36px rgba(255,107,107,0.06)}
+
+@media (min-width:900px){.hero{flex-direction:row;align-items:center}}
+
+/* ---------------- decorative background & floating blobs ---------------- */
+
+/* великі декоративні блоби та легка текстура для фонового шарування */
+body {
+  /* додаємо додаткові шари поверх існуючого фону */
+  /* brighter, slightly more colorful background layers for a cheerful look */
+  background:
+    radial-gradient(1000px 500px at 5% 12%, rgba(123,228,149,0.12), transparent 10%),
+    radial-gradient(800px 450px at 92% 88%, rgba(167,139,250,0.10), transparent 12%),
+    linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,250,252,0.35)),
+    var(--bg-1);
+  background-attachment: fixed;
+  background-size: cover;
 }
 
-/* Картка питання */
-.question-card{
-  background:var(--card-bg);
-  border-radius:var(--radius);
-  box-shadow:0 6px 18px rgba(2,6,23,0.06);
-  padding:1.25rem;
-  display:flex;
-  flex-direction:column;
-  gap:0.75rem;
+/* контейнер повинен бути relative, щоб псевдоелементи позиціювались відносно нього */
+.quiz-container {
+  position: relative;
+  overflow: visible; /* дозволяємо декоративним елементам виходити за межі */
 }
 
-.question-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:0.5rem;
-}
-.question-number{
-  background:rgba(59,130,246,0.08);
-  color:var(--primary);
-  padding:0.25rem 0.5rem;
-  border-radius:8px;
-  font-weight:700;
-  font-size:0.9rem;
-}
-.question-text{
-  font-size:1.125rem;
-  font-weight:600;
+/* великі м’які блоби (дві форми, псевдоелементи) */
+.quiz-container::before,
+.quiz-container::after {
+  content: "";
+  position: absolute;
+  z-index: 0; /* позаду контенту */
+  filter: blur(28px);
+  opacity: 0.9;
+  pointer-events: none;
 }
 
-/* Відповіді */
-.choices{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:0.5rem;
-  margin-top:0.25rem;
-}
-.choice{
-  display:flex;
-  align-items:center;
-  gap:0.75rem;
-  background:linear-gradient(180deg, rgba(2,6,23,0.02), rgba(2,6,23,0.01));
-  border:1px solid rgba(15,23,42,0.04);
-  padding:0.75rem 0.9rem;
-  border-radius:8px;
-  cursor:pointer;
-  transition:transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
-  user-select:none;
-}
-.choice:hover{transform:translateY(-3px); box-shadow:0 6px 18px rgba(2,6,23,0.06)}
-.choice:active{transform:translateY(0)}
-.choice .label{
-  font-weight:600;
-}
-.choice .detail{
-  color:var(--muted);
-  font-size:0.9rem;
+/* лівий верхній блоб (м'ятно-блакитний) */
+.quiz-container::before {
+  width: 520px;
+  height: 520px;
+  left: -240px;
+  top: -240px;
+  background: radial-gradient(circle at 30% 30%, rgba(123,228,149,0.18), rgba(76,201,240,0.10) 42%, transparent 62%);
+  border-radius: 50%;
+  transform: rotate(-12deg);
+  animation: floatSlow 8s ease-in-out infinite;
 }
 
-/* Стани вибору (JS додає класи) */
-.choice.selected{
-  border-color:rgba(59,130,246,0.2);
-  background:linear-gradient(180deg, rgba(59,130,246,0.06), rgba(59,130,246,0.03));
-}
-.choice.correct{
-  border-color:rgba(16,185,129,0.18);
-  background:linear-gradient(180deg, rgba(16,185,129,0.06), rgba(16,185,129,0.03));
-}
-.choice.incorrect{
-  border-color:rgba(239,68,68,0.16);
-  background:linear-gradient(180deg, rgba(239,68,68,0.04), rgba(239,68,68,0.02));
-  opacity:0.95;
+/* правий нижній блоб (лавандово-кораловий) */
+.quiz-container::after {
+  width: 420px;
+  height: 420px;
+  right: -180px;
+  bottom: -180px;
+  background: radial-gradient(circle at 65% 35%, rgba(255,107,107,0.18), rgba(167,139,250,0.12) 46%, transparent 66%);
+  border-radius: 50%;
+  transform: rotate(8deg);
+  animation: floatSlowReverse 9s ease-in-out infinite;
 }
 
-/* Кнопки керування (наступне, перевірити) */
-.controls{
-  display:flex;
-  gap:0.5rem;
-  justify-content:flex-end;
-  margin-top:0.5rem;
-}
-.btn{
-  padding:0.6rem 0.9rem;
-  border-radius:8px;
-  border:0;
-  cursor:pointer;
-  font-weight:700;
-  background:var(--primary);
-  color:white;
-  transition:transform 120ms ease, opacity 120ms ease;
-}
-.btn.secondary{
-  background:transparent;
-  color:var(--text);
-  border:1px solid rgba(15,23,42,0.06);
-}
-.btn:disabled{opacity:0.5; cursor:not-allowed}
-
-/* Підказка / зворотний зв'язок */
-.feedback{
-  margin-top:0.5rem;
-  padding:0.6rem 0.8rem;
-  border-radius:8px;
-  font-size:0.95rem;
-}
-.feedback.success{background:rgba(16,185,129,0.06); color:var(--success)}
-.feedback.error{background:rgba(239,68,68,0.04); color:var(--danger)}
-
-/* Екран результатів */
-.results{
-  text-align:center;
-  padding:2rem 1.25rem;
-  background:var(--card-bg);
-  border-radius:var(--radius);
-  box-shadow:0 10px 30px rgba(2,6,23,0.06);
-}
-.results h2{font-size:1.5rem; margin-bottom:0.5rem}
-.results .score{font-size:2.25rem; font-weight:800; color:var(--primary)}
-.results .summary{color:var(--muted); margin-top:0.5rem}
-
-/* Додаткові корисні класи */
-.hidden{display:none !important}
-.center{text-align:center}
-.small{font-size:0.85rem}
-.muted{color:var(--muted)}
-
-/* Анімації (легкі) */
-@keyframes popIn{from{transform:scale(.985); opacity:0}to{transform:scale(1);opacity:1}}
-.question-card{animation:popIn 220ms ease both}
-
-/* Фокус для доступності */
-.choice:focus{outline:3px solid rgba(59,130,246,0.18); outline-offset:3px}
-.btn:focus{outline:3px solid rgba(59,130,246,0.18); outline-offset:3px}
-
-/* Адаптивність */
-@media (min-width:640px){
-  .choices{grid-template-columns:1fr 1fr;}
-}
-@media (min-width:980px){
-  body{padding:3rem}
-  .quiz-container{gap:1.25rem}
-  .question-text{font-size:1.25rem}
+/* малі плаваючі бульбашки — створюємо їх через псевдоелементи на body (2 штуки) */
+body::before,
+body::after,
+.quiz-container .bubble {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  border-radius: 999px;
+  opacity: 0.85;
+  pointer-events: none;
+  transition: transform 0.6s linear;
 }
 
-/* Друк */
-@media print{
-  body{background:white}
-  .controls, .topbar{display:none}
+/* два фіксованих бульбашки на body */
+body::before {
+  width: 110px;
+  height: 110px;
+  left: 5%;
+  top: 14%;
+  background: linear-gradient(135deg, rgba(76,201,240,0.18), rgba(123,228,149,0.12));
+  filter: blur(6px);
+  animation: floatTiny 6s ease-in-out infinite;
+}
+body::after {
+  width: 78px;
+  height: 78px;
+  right: 7%;
+  top: 22%;
+  background: linear-gradient(135deg, rgba(255,107,107,0.16), rgba(167,139,250,0.12));
+  filter: blur(5px);
+  animation: floatTinyReverse 5.5s ease-in-out infinite;
 }
 
-/* Коротка секція для стилізації помилок/логів (розробка) */
-.dev-border{border:1px dashed rgba(15,23,42,0.05)}
+/* (опціонально) додати кілька видимих/колірних декоративних точок у контейнері */
+.quiz-container .bubble {
+  width: 36px;
+  height: 36px;
+  right: 18%;
+  top: 62%;
+  background: linear-gradient(135deg, rgba(167,139,250,0.14), rgba(76,201,240,0.10));
+  transform: translateY(0);
+  animation: floatTiny 7s ease-in-out infinite;
+  z-index: 0;
+}
 
-/* Клас для прихованого тексту (екранні рідери) */
-.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* анімації плавного плаваючого руху */
+@keyframes floatSlow {
+  0% { transform: translateY(0) rotate(-12deg); }
+  50% { transform: translateY(-16px) rotate(-6deg); }
+  100% { transform: translateY(0) rotate(-12deg); }
+}
+@keyframes floatSlowReverse {
+  0% { transform: translateY(0) rotate(8deg); }
+  50% { transform: translateY(14px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(8deg); }
+}
+@keyframes floatTiny {
+  0% { transform: translateY(0) scale(1); opacity:0.9; }
+  50% { transform: translateY(-10px) scale(1.05); opacity:0.95; }
+  100% { transform: translateY(0) scale(1); opacity:0.9; }
+}
+@keyframes floatTinyReverse {
+  0% { transform: translateY(0) scale(1); opacity:0.9; }
+  50% { transform: translateY(8px) scale(0.98); opacity:0.95; }
+  100% { transform: translateY(0) scale(1); opacity:0.9; }
+}
 
-/* Кінець файлу */
+/* Забезпечити, що контент (заголовок і кнопки) знаходяться над декоративними елементами */
+.quiz-container > * {
+  position: relative;
+  z-index: 2;
+}
 
+/* Мобільні корекції — зменшуємо розміри «блобів» */
+@media (max-width: 820px) {
+  .quiz-container::before { width: 320px; height: 320px; left: -160px; top: -160px; filter: blur(28px); opacity:0.85; }
+  .quiz-container::after { width: 260px; height: 260px; right: -110px; bottom: -110px; filter: blur(24px); opacity:0.85; }
+  body::before, body::after { display: none; }
+  .quiz-container .bubble { display: none; }
+}
+
+/* Create/edit form styles */
+.form-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,255,0.85));
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(8,20,40,0.08);
+  border: 1px solid rgba(0,0,0,0.04);
+  width: 100%;
+}
+.form-card h2 {
+  margin: 0 0 8px 0;
+  font-family: 'Baloo 2', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+.field { margin-bottom: 12px; }
+.field label { display:block; font-weight:600; margin-bottom:6px; }
+.field input[type="text"], .field textarea { width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.08); }
+.questions-area { margin-top: 8px; }
+.q-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.questions-list { display:flex; flex-direction:column; gap:12px; }
+.question-item { padding:14px; border-radius:10px; background: rgba(255,255,255,0.78); border:1px dashed rgba(0,0,0,0.03); }
+.question-item label { font-weight:600; display:block; margin-bottom:8px; }
+.question-text { width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.08); margin-bottom:10px; font-family:var(--font-body); }
+.options-grid { display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:8px; }
+.option-row { display:flex; gap:10px; align-items:center; }
+.option-row input[type="text"] { flex:1; padding:8px 10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); }
+.correct-radio { width:16px; height:16px; }
+.control-row { display:flex; gap:8px; margin-top:14px; align-items:center; }
+.btn.small { padding:6px 10px; font-size:13px; }
+.question-item .btn.danger { background:#ffefef; color:#b33; border:1px solid rgba(180,20,20,0.08); margin-top:12px; display:inline-block; padding:8px 12px; border-radius:8px; }

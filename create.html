@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Створити квіз — QuizXD</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="quiz-container">
+    <div class="form-card" role="main">
+      <h2>Створити новий квіз</h2>
+      <form id="create-form">
+        <div class="field">
+          <label>Назва квізу</label>
+          <input type="text" id="quiz-title" required placeholder="Наприклад: Вікторина з географії">
+        </div>
+
+        <div class="field">
+          <label>Опис</label>
+          <textarea id="quiz-desc" rows="2" placeholder="Коротко про що квіз"></textarea>
+        </div>
+
+        <div class="questions-area">
+          <div class="q-header">
+            <h3>Питання</h3>
+            <button type="button" id="add-question" class="btn small">Додати питання</button>
+          </div>
+          <div id="questions-list" class="questions-list"></div>
+        </div>
+
+        <div class="control-row">
+          <button type="submit" class="btn primary">Зберегти квіз</button>
+          <a class="btn" href="index.html">Скасувати</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script src="storage.js" defer></script>
+  <script src="create.js" defer></script>
+</body>
+</html>

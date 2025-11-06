@@ -1,74 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>testikXD — Квіз</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>QuizXD</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="quiz-container">
+    <h1 class="title">Вітаємо у QuizXD!</h1>
 
-  <main class="quiz-container" id="quiz" aria-live="polite">
-    <header class="quiz-header">
-      <div>
-        <h1 class="quiz-title" id="quiz-title">Приклад квізу</h1>
-        <p class="quiz-meta" id="quiz-desc">Відповідайте на питання — в кінці отримаєте результат.</p>
-      </div>
-      <div class="topbar" aria-hidden="false">
-        <div class="progress" aria-hidden="true">
-          <div class="progress-bar" id="progress-bar" style="width:0%"></div>
-        </div>
-      </div>
-    </header>
+    <div class="actions">
+      <button class="btn createquizbutton" id="create-quiz">Створити свій quiz</button>
+      <button class="btn randomquizbutton" id="random-quiz">Випадковий квіз 🎲</button>
+    </div>
+  </div>
 
-    <section class="question-card" id="question-card">
-      <div class="question-header">
-        <div class="question-number" id="q-number">1</div>
-        <div class="question-text" id="question-text">Питання завантажується...</div>
-      </div>
-
-      <ul class="choices" id="choices" role="list">
-        <!-- Варіанти будуть згенеровані JS -->
-      </ul>
-
-      <div class="controls">
-        <button id="prev-btn" class="btn secondary" type="button" disabled>Назад</button>
-        <button id="next-btn" class="btn" type="button">Далі</button>
-      </div>
-    </section>
-
-    <section class="results hidden" id="results" aria-hidden="true">
-      <h2>Результат</h2>
-      <div class="score" id="score">0</div>
-      <p class="summary muted" id="summary">Результат буде показано тут</p>
-      <div style="margin-top:1rem">
-        <button id="restart-btn" class="btn secondary">Пройти ще раз</button>
-      </div>
-    </section>
-
-    <!-- Вбудовані дані квізу (можна замінити на завантаження з сервера) -->
-    <script type="application/json" id="quiz-data">
-    {
-      "title": "Розширений приклад квізу",
-      "description": "Демо-запитання з додатковими варіантами відповідей",
-      "questions": [
-        {"text":"Який колір неба?","options":["Червоний","Синій","Зелений","Жовтий","Чорний","Фіолетовий"],"answer":1},
-        {"text":"2 + 2 = ?","options":["3","4","5","22","0","-4"],"answer":1},
-        {"text":"Столиця України?","options":["Львів","Одеса","Київ","Харків","Дніпро","Запоріжжя"],"answer":2},
-        {"text":"Який з цих фруктів червоний?","options":["Банан","Яблуко","Груша","Лимон","Ківі","Вишня"],"answer":1},
-        {"text":"Яка планета найближча до Сонця?","options":["Земля","Марс","Меркурій","Венера","Юпітер","Сатурн"],"answer":2},
-        {"text":"Який рік початку Другої світової війни?","options":["1914","1939","1945","1929","1950","1941"],"answer":1},
-        {"text":"HTML — це?","options":["Мова стилів","Мова розмітки","База даних","Операційна система","Мова програмування","Фреймворк"],"answer":1},
-        {"text":"Що відображає тег <strong>&lt;h1&gt;</strong>?","options":["Кнопку","Зображення","Заголовок рівня 1","Параграф","Список","Блок цитати"],"answer":2},
-        {"text":"Який тип спорту — футбол?","options":["Індивідуальний","Командний","Водний","Бойовий","Зимовий","Повітряний"],"answer":1},
-        {"text":"Що вимірюється у метрах?","options":["Маса","Температура","Довжина","Час","Швидкість","Площа"],"answer":2}
-      ]
-    }
-    </script>
-
-  </main>
-
+  <script src="storage.js" defer></script>
   <script src="xz.js" defer></script>
-
 </body>
 </html>
