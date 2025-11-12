@@ -4,6 +4,32 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Для home.html - без скролу */
+.home-outer {
+  height: 100vh;
+  overflow: hidden !important;
+}
+
+html:has(.home-outer) {
+  overflow: hidden;
+}
+
+html:has(.home-outer) body {
+  overflow: hidden !important;
+  height: 100vh;
+}
+
 :root {
   --font-heading: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
@@ -28,12 +54,7 @@ body {
               var(--bg-1);
   color: var(--text);
   padding: 20px;
-  /* hide scrollbars on pages (clips overflow) */
-  overflow: hidden;
 }
-
-/* also ensure html doesn't produce scrollbars */
-html { overflow: hidden; }
 
 h1, h2{
   font-family: var(--font-heading);
@@ -69,6 +90,32 @@ h1, h2{
 
 /* Primary and accent */
 .createquizbutton, .btn-primary{background:linear-gradient(180deg,var(--primary),var(--primary-2));color:#fff}
+
+/* Primary button - яскрава з градієнтом */
+.btn.primary {
+  background: linear-gradient(90deg, #b892ff 0%, #ff96d1 100%);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 10px 26px rgba(187, 140, 255, 0.14);
+}
+
+.btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(255, 150, 200, 0.18);
+}
+
+/* Secondary button - сіра */
+.btn.secondary {
+  background: #e5e7eb;
+  color: #6b7280;
+  font-weight: 700;
+}
+
+.btn.secondary:hover {
+  background: #d1d5db;
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(107, 114, 128, 0.12);
+}
 
 /* Container */
 .quiz-container{max-width:1100px;margin:0 auto}
