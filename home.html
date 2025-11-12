@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QuizXD — Головна</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="home-outer" style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;background:transparent;">
+    <main class="home-inner" style="text-align:center;max-width:720px;width:100%">
+      <!-- logo (same as index) -->
+      <a href="home.html" aria-label="QuizXD" style="display:inline-block;margin-bottom:18px">
+        <svg width="88" height="88" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="g1-home" x1="0" x2="1">
+              <stop offset="0" stop-color="#b892ff" />
+              <stop offset="1" stop-color="#ff96d1" />
+            </linearGradient>
+          </defs>
+          <rect width="48" height="48" rx="10" fill="url(#g1-home)" />
+          <text x="24" y="30" text-anchor="middle" font-family="Inter, Poppins, sans-serif" font-size="20" fill="#fff" font-weight="800">QX</text>
+        </svg>
+      </a>
+
+      <h1 class="site-title" style="font-size:2.25rem;margin-bottom:8px">QuizXD</h1>
+
+      <div style="margin-top:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <a class="btn createquizbutton" href="index.html" role="button" style="text-decoration:none">Пройти тест</a>
+    <a class="btn btn-outline" href="create.html" role="button" style="text-decoration:none"><span class="inner"><span class="text-gradient">Створити свій quiz</span></span></a>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="storage.js" defer></script>
+  <script src="xz.js" defer></script>
+</body>
+</html>

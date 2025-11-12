@@ -5,7 +5,7 @@
 }
 
 :root {
-  --font-heading: 'Baloo 2', cursive;
+  --font-heading: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
   --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   --bg-1: #FFF8F3;
   --card: #FFFFFF;
@@ -28,7 +28,12 @@ body {
               var(--bg-1);
   color: var(--text);
   padding: 20px;
+  /* hide scrollbars on pages (clips overflow) */
+  overflow: hidden;
 }
+
+/* also ensure html doesn't produce scrollbars */
+html { overflow: hidden; }
 
 h1, h2{
   font-family: var(--font-heading);
@@ -40,11 +45,11 @@ h1, h2{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* place header at top */
   gap: 1rem;
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 12px 16px 40px;
 }
 
 .title{
@@ -64,7 +69,6 @@ h1, h2{
 
 /* Primary and accent */
 .createquizbutton, .btn-primary{background:linear-gradient(180deg,var(--primary),var(--primary-2));color:#fff}
-.randomquizbutton, .btn-accent{background:linear-gradient(90deg,var(--accent),var(--purple));color:#fff}
 
 /* Container */
 .quiz-container{max-width:1100px;margin:0 auto}
@@ -72,18 +76,150 @@ h1, h2{
 /* small utilities */
 .hero-illustration{width:320px;height:200px;border-radius:16px;background:linear-gradient(180deg,#fff,#fff6ff);box-shadow:0 18px 36px rgba(255,107,107,0.06)}
 
+/* Header and topic navigation */
+.site-header{
+  display: grid;
+  /* match the cards grid so header columns line up with card columns */
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  align-items: center;
+  gap: 18px; /* same gap as .cards */
+  width: 100%;
+  max-width: 1100px;
+  margin: 12px auto;
+  padding: 12px 18px; /* same horizontal padding as .topics */
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  /* restore original left placement: brand lives in the first header column */
+  grid-column: 1 / 2;
+}
+.site-logo{display:inline-flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:12px;box-shadow:0 10px 20px rgba(120,100,180,0.12);}
+.brand-text{display:flex;flex-direction:column; margin-left:4px}
+.site-title{font-family:var(--font-heading);font-size:1.6rem;margin:0;color:var(--text);letter-spacing:0.4px}
+.site-sub{font-family:var(--font-body);color:var(--muted);font-size:0.92rem;margin-top:4px}
+.header-actions{display:flex;align-items:center;gap:10px;grid-column:4/5;justify-self:end}
+
+@media (max-width:900px) {
+  .site-header { grid-template-columns: auto 1fr auto; }
+  .brand-text { grid-column: 1/2 }
+  .header-actions { grid-column: 3/4; justify-self:end }
+}
+
+@media (max-width:520px) {
+  .createquizbutton { padding:8px 12px; font-size:14px }
+}
+.topic-nav{display:none}
+.topic-link{background:linear-gradient(180deg,rgba(255,255,255,0.9),rgba(255,255,255,0.85));padding:8px 14px;border-radius:999px;text-decoration:none;color:var(--text);font-weight:800;box-shadow:0 8px 18px rgba(120,120,140,0.08);transform:translateY(0);transition:transform .12s ease,box-shadow .12s ease}
+.topic-link:hover{transform:translateY(-4px);box-shadow:0 18px 36px rgba(120,120,160,0.12)}
+
+/* Topic sections and cards */
+.topics{max-width:1100px;margin:0 auto;padding:0 18px 40px}
+.topic-section{margin:20px 0}
+.topic-title{font-family:var(--font-heading);margin-bottom:10px}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(180px,1fr));gap:18px;grid-auto-rows:1fr}
+.quiz-card{background:linear-gradient(180deg,rgba(255,255,255,0.96),rgba(245,250,255,0.98));padding:16px;border-radius:16px;box-shadow:0 18px 30px rgba(120,110,160,0.06);border:1px solid rgba(0,0,0,0.03);min-height:120px;display:flex;flex-direction:column;position:relative}
+.quiz-card-title{margin:0 0 8px 0;font-weight:700;font-family:var(--font-heading);font-size:1.05rem}
+.quiz-card-desc{margin:0 0 10px 0;color:var(--muted);font-size:0.95rem;flex:1}
+.card-actions{display:flex;justify-content:flex-end;align-items:flex-end;margin-top:8px}
+
+/* small badge showing number of questions on a card */
+.quiz-count{
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 3;
+  display: inline-block;
+  padding: 0; /* no pill background, just text */
+  font-weight: 300; /* thin */
+  font-size: 0.85rem;
+  color: var(--muted); /* subtle gray */
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+}
+.quiz-count::before{ content: none }
+
+@media (max-width:520px) {
+  .quiz-count{ top: 8px; right: 8px; padding:5px 8px; font-size:0.8rem }
+}
+
+/* Cartoon-ish create button */
+.createquizbutton{
+  /* match the logo gradient: #b892ff -> #ff96d1 */
+  background: linear-gradient(90deg, #b892ff 0%, #ff96d1 100%);
+  color:#ffffff;
+  padding:11px 18px;
+  border-radius:12px;
+  font-weight:700;
+  font-family:var(--font-body);
+  box-shadow:0 10px 26px rgba(187,140,255,0.14);
+  transform:translateY(0);
+  transition:transform .12s ease,box-shadow .12s ease;
+  border:0;
+}
+.createquizbutton:hover{transform:translateY(-3px);box-shadow:0 18px 38px rgba(255,150,200,0.18)}
+
+/* outlined button variant: transparent background + gradient border */
+.btn-outline{
+  background: transparent;
+  padding:10px 16px;
+  border-radius:12px;
+  position: relative;
+  font-weight:700;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  display:inline-block;
+  border-radius:12px; /* rounded frame */
+  padding:2px; /* thickness of the gradient frame */
+  background: linear-gradient(90deg, #b892ff 0%, #ff96d1 100%);
+  overflow: hidden; /* ensure rounded corners clip the frame */
+}
+.btn-outline:hover{ transform: translateY(-3px); }
+
+/* inner area that visually appears transparent (we use the base page color to mask the frame) */
+.btn-outline .inner {
+  display:inline-block;
+  padding:11px 18px; /* match filled button sizing */
+  border-radius:10px; /* slightly smaller to reveal the frame */
+  background: var(--bg-1); /* neutral fill so the frame looks like an outline */
+}
+
+/* gradient text inside the inner element */
+.btn-outline .text-gradient{
+  background: linear-gradient(90deg, #b892ff 0%, #ff96d1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+  font-weight:700;
+}
+
+/* gradient text for outlined buttons (ensure cross-browser visibility) */
+.btn-outline .text-gradient{
+  background: linear-gradient(90deg, #b892ff 0%, #ff96d1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent; /* ensures gradient text on WebKit */
+  color: transparent;
+  display: inline-block;
+  font-weight:700;
+}
+
 @media (min-width:900px){.hero{flex-direction:row;align-items:center}}
 
 /* ---------------- decorative background & floating blobs ---------------- */
 
 /* великі декоративні блоби та легка текстура для фонового шарування */
 body {
-  /* додаємо додаткові шари поверх існуючого фону */
-  /* brighter, slightly more colorful background layers for a cheerful look */
+  /* додаємо пастельні шари для приємного мультяшного фону */
   background:
-    radial-gradient(1000px 500px at 5% 12%, rgba(123,228,149,0.12), transparent 10%),
-    radial-gradient(800px 450px at 92% 88%, rgba(167,139,250,0.10), transparent 12%),
-    linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,250,252,0.35)),
+    radial-gradient(1000px 500px at 8% 10%, rgba(255,214,176,0.16), transparent 12%),
+    radial-gradient(900px 480px at 92% 88%, rgba(176,220,255,0.14), transparent 14%),
+    linear-gradient(180deg, rgba(255,250,245,0.9), rgba(250,245,255,0.9)),
     var(--bg-1);
   background-attachment: fixed;
   background-size: cover;
@@ -110,21 +246,21 @@ body {
 .quiz-container::before {
   width: 520px;
   height: 520px;
-  left: -240px;
-  top: -240px;
-  background: radial-gradient(circle at 30% 30%, rgba(123,228,149,0.18), rgba(76,201,240,0.10) 42%, transparent 62%);
+  left: -220px;
+  top: -220px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,195,160,0.26), rgba(255,160,200,0.16) 42%, transparent 62%);
   border-radius: 50%;
-  transform: rotate(-12deg);
+  transform: rotate(-14deg);
   animation: floatSlow 8s ease-in-out infinite;
 }
 
 /* правий нижній блоб (лавандово-кораловий) */
 .quiz-container::after {
-  width: 420px;
-  height: 420px;
-  right: -180px;
-  bottom: -180px;
-  background: radial-gradient(circle at 65% 35%, rgba(255,107,107,0.18), rgba(167,139,250,0.12) 46%, transparent 66%);
+  width: 440px;
+  height: 440px;
+  right: -200px;
+  bottom: -200px;
+  background: radial-gradient(circle at 65% 35%, rgba(160,190,255,0.18), rgba(200,160,255,0.14) 46%, transparent 66%);
   border-radius: 50%;
   transform: rotate(8deg);
   animation: floatSlowReverse 9s ease-in-out infinite;
@@ -145,20 +281,20 @@ body::after,
 
 /* два фіксованих бульбашки на body */
 body::before {
-  width: 110px;
-  height: 110px;
-  left: 5%;
-  top: 14%;
-  background: linear-gradient(135deg, rgba(76,201,240,0.18), rgba(123,228,149,0.12));
+  width: 120px;
+  height: 120px;
+  left: 6%;
+  top: 12%;
+  background: linear-gradient(135deg, rgba(255,180,150,0.18), rgba(200,180,255,0.12));
   filter: blur(6px);
   animation: floatTiny 6s ease-in-out infinite;
 }
 body::after {
-  width: 78px;
-  height: 78px;
+  width: 84px;
+  height: 84px;
   right: 7%;
-  top: 22%;
-  background: linear-gradient(135deg, rgba(255,107,107,0.16), rgba(167,139,250,0.12));
+  top: 20%;
+  background: linear-gradient(135deg, rgba(170,200,255,0.16), rgba(255,170,200,0.12));
   filter: blur(5px);
   animation: floatTinyReverse 5.5s ease-in-out infinite;
 }
@@ -204,9 +340,16 @@ body::after {
 }
 
 /* Мобільні корекції — зменшуємо розміри «блобів» */
-@media (max-width: 820px) {
+@media (max-width: 1200px) {
+  .cards{grid-template-columns:repeat(3,minmax(160px,1fr));}
+}
+@media (max-width: 900px) {
+  .cards{grid-template-columns:repeat(2,minmax(160px,1fr));}
   .quiz-container::before { width: 320px; height: 320px; left: -160px; top: -160px; filter: blur(28px); opacity:0.85; }
   .quiz-container::after { width: 260px; height: 260px; right: -110px; bottom: -110px; filter: blur(24px); opacity:0.85; }
+}
+@media (max-width: 520px) {
+  .cards{grid-template-columns:repeat(1,1fr);}
   body::before, body::after { display: none; }
   .quiz-container .bubble { display: none; }
 }
@@ -226,7 +369,9 @@ body::after {
 }
 .field { margin-bottom: 12px; }
 .field label { display:block; font-weight:600; margin-bottom:6px; }
-.field input[type="text"], .field textarea { width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.08); }
+.field input[type="text"],
+.field textarea { resize: none; width:100%; padding:10px 12px; border-radius:8px; border:1px solid rgba(0,0,0,0.08); }
+.field textarea { min-height:200px; height: 100%;}
 .questions-area { margin-top: 8px; }
 .q-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
 .questions-list { display:flex; flex-direction:column; gap:12px; }

@@ -3,18 +3,139 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>QuizHMMM</title>
+    <title>QuizXD</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link hrefи="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+      /* Restore vertical scrolling for index.html only (hide horizontal scroll) */
+      html, body { overflow-x: hidden !important; overflow-y: auto !important; }
+    </style>
 </head>
 <body>
   <div class="quiz-container">
-    <h1 class="title">Вітаємо у QuizHMMM!</h1>
+    <header class="site-header">
+      <div class="brand">
+        <a class="site-logo" href="index.html" aria-label="QuizXD logo">
+          <svg width="40" height="40" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#b892ff" />
+                <stop offset="1" stop-color="#ff96d1" />
+              </linearGradient>
+            </defs>
+            <rect width="48" height="48" rx="10" fill="url(#g1)" />
+            <text x="24" y="30" text-anchor="middle" font-family="Inter, Poppins, sans-serif" font-size="20" fill="#fff" font-weight="800">QX</text>
+          </svg>
+        </a>
+        <div class="brand-text">
+          <h1 class="site-title">QuizXD</h1>
+        </div>
+      </div>
 
-    <div class="actions">
-      <button class="btn createquizbutton" id="create-quiz">Створити свій quiz</button>
-      <button class="btn randomquizbutton" id="random-quiz">Випадковий квіз 🎲</button>
-    </div>
+      <div class="header-actions">
+        <button class="btn createquizbutton" id="create-quiz">Створити свій quiz</button>
+      </div>
+    </header>
+
+    <main class="topics">
+      <section id="topic-1" class="topic-section">
+        <h2 class="topic-title">🌍 Географія <span class="topic-sub">мандруй світом</span></h2>
+        <div class="cards">
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 12">12 пит.</span>
+            <h3 class="quiz-card-title">Країни світу</h3>
+            <p class="quiz-card-desc">Короткий тест про столиці та кордони.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 8">8 пит.</span>
+            <h3 class="quiz-card-title">Річки і гори</h3>
+            <p class="quiz-card-desc">Пара питань про природу.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 9">9 пит.</span>
+            <h3 class="quiz-card-title">Столиці</h3>
+            <p class="quiz-card-desc">Вгадай столицю по опису.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 6">6 пит.</span>
+            <h3 class="quiz-card-title">Карта світу</h3>
+            <p class="quiz-card-desc">Швидкий тест на орієнтування.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 7">7 пит.</span>
+            <h3 class="quiz-card-title">Океани і моря</h3>
+            <p class="quiz-card-desc">Питання про водні простори.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 5">5 пит.</span>
+            <h3 class="quiz-card-title">Кліматичні пояси</h3>
+            <p class="quiz-card-desc">Тест про клімат і зони.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 8">8 пит.</span>
+            <h3 class="quiz-card-title">Рельєф</h3>
+            <p class="quiz-card-desc">Гори, рівнини, плоскогір'я.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 4">4 пит.</span>
+            <h3 class="quiz-card-title">Географічні рекорди</h3>
+            <p class="quiz-card-desc">Найвища, найдовша, найглибша.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="topic-2" class="topic-section">
+        <h2 class="topic-title">🏺 Історія <span class="topic-sub">подорож у часі</span></h2>
+        <div class="cards">
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 10">10 пит.</span>
+            <h3 class="quiz-card-title">Стародавній світ</h3>
+            <p class="quiz-card-desc">Тест про цивілізації та події.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 8">8 пит.</span>
+            <h3 class="quiz-card-title">Середньовіччя</h3>
+            <p class="quiz-card-desc">Короткий тест про королів і кордони.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 9">9 пит.</span>
+            <h3 class="quiz-card-title">Нова ера</h3>
+            <p class="quiz-card-desc">Революції та винаходи.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 7">7 пит.</span>
+            <h3 class="quiz-card-title">Українська історія</h3>
+            <p class="quiz-card-desc">Основні події та постаті.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="topic-3" class="topic-section">
+        <h2 class="topic-title">🖥️ Техно <span class="topic-sub">базові поняття</span></h2>
+        <div class="cards">
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 9">9 пит.</span>
+            <h3 class="quiz-card-title">Основи web</h3>
+            <p class="quiz-card-desc">Прості питання про HTML/CSS/JS.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 8">8 пит.</span>
+            <h3 class="quiz-card-title">Алгоритми</h3>
+            <p class="quiz-card-desc">Логіка та прості задачі.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 6">6 пит.</span>
+            <h3 class="quiz-card-title">Гаджети</h3>
+            <p class="quiz-card-desc">Питання про телефони та девайси.</p>
+          </article>
+          <article class="quiz-card">
+            <span class="quiz-count" aria-label="Кількість питань: 5">5 пит.</span>
+            <h3 class="quiz-card-title">Безпека</h3>
+            <p class="quiz-card-desc">Основи безпеки в мережі.</p>
+          </article>
+        </div>
+      </section>
+    </main>
   </div>
 
   <script src="storage.js" defer></script>
