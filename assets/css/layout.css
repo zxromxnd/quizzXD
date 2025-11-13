@@ -1,0 +1,176 @@
+/* Page layout: centered greeting and actions */
+.quiz-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* place header at top */
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 16px 40px;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 2.25rem;
+  margin: 0;
+  text-align: center;
+  white-space: normal; /* allow wrapping if needed */
+}
+
+.actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 12px;
+}
+
+/* Container */
+.quiz-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Header and topic navigation */
+.site-header {
+  display: grid;
+  /* match the cards grid so header columns line up with card columns */
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  align-items: center;
+  gap: 18px; /* same gap as .cards */
+  width: 100%;
+  max-width: 1100px;
+  margin: 12px auto;
+  padding: 12px 18px; /* same horizontal padding as .topics */
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* restore original left placement: brand lives in the first header column */
+  grid-column: 1 / 2;
+}
+
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(120,100,180,0.12);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 4px;
+}
+
+.site-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  margin: 0;
+  color: var(--text);
+  letter-spacing: 0.4px;
+}
+
+.site-sub {
+  font-family: var(--font-body);
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-top: 4px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  grid-column: 4/5;
+  justify-self: end;
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    grid-template-columns: auto 1fr auto;
+  }
+  .brand-text {
+    grid-column: 1/2;
+  }
+  .header-actions {
+    grid-column: 3/4;
+    justify-self: end;
+  }
+}
+
+.topic-nav {
+  display: none;
+}
+
+.topic-link {
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 800;
+  box-shadow: 0 8px 18px rgba(120,120,140,0.08);
+  transform: translateY(0);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.topic-link:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(120,120,160,0.12);
+}
+
+/* Topic sections and cards */
+.topics {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 18px 40px;
+}
+
+.topic-section {
+  margin: 20px 0;
+}
+
+.topic-title {
+  font-family: var(--font-heading);
+  margin-bottom: 10px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 18px;
+  grid-auto-rows: 1fr;
+}
+
+@media (min-width: 900px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Мобільні корекції — зменшуємо розміри «блобів» */
+@media (max-width: 1200px) {
+  .cards {
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+

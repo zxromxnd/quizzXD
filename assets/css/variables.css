@@ -1,0 +1,63 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Для home.html - без скролу */
+.home-outer {
+  height: 100vh;
+  overflow: hidden !important;
+}
+
+html:has(.home-outer) {
+  overflow: hidden;
+}
+
+html:has(.home-outer) body {
+  overflow: hidden !important;
+  height: 100vh;
+}
+
+:root {
+  --font-heading: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  --font-body: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --bg-1: #FFF8F3;
+  --card: #FFFFFF;
+  --primary: #4CC9F0;
+  --primary-2: #31b7dc;
+  --accent: #FF6B6B;
+  --purple: #A78BFA;
+  --muted: #6B7280;
+  --text: #0f172a;
+  --radius-xl: 22px;
+  --radius-lg: 14px;
+  --radius: 10px;
+  --shadow-1: 0 8px 22px rgba(35,37,47,0.08);
+  --shadow-2: 0 18px 40px rgba(35,37,47,0.10);
+}
+
+body {
+  font-family: var(--font-body);
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(123,228,149,0.06), transparent 8%),
+              radial-gradient(900px 500px at 90% 90%, rgba(167,139,250,0.05), transparent 10%),
+              var(--bg-1);
+  color: var(--text);
+  padding: 20px;
+}
+
+h1, h2 {
+  font-family: var(--font-heading);
+}
+

@@ -1,0 +1,329 @@
+/* Button base */
+.btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  padding: 0.7rem 1.05rem;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform .14s ease, box-shadow .14s ease;
+  box-shadow: var(--shadow-1);
+}
+
+.btn:focus {
+  outline: 3px solid rgba(76,201,240,0.16);
+  outline-offset: 3px;
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(35,37,47,0.12);
+}
+
+/* Primary and accent */
+.createquizbutton, .btn-primary {
+  background: linear-gradient(180deg, var(--primary), var(--primary-2));
+  color: #fff;
+}
+
+/* Primary button - яскрава з градієнтом */
+.btn.primary {
+  background: linear-gradient(90deg, #b892ff 0%, #ff96d1 100%);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 10px 26px rgba(187, 140, 255, 0.14);
+}
+
+.btn.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(255, 150, 200, 0.18);
+}
+
+/* Secondary button - сіра */
+.btn.secondary {
+  background: #e5e7eb;
+  color: #6b7280;
+  font-weight: 700;
+}
+
+.btn.secondary:hover {
+  background: #d1d5db;
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(107, 114, 128, 0.12);
+}
+
+/* small utilities */
+.hero-illustration {
+  width: 320px;
+  height: 200px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, #fff, #fff6ff);
+  box-shadow: 0 18px 36px rgba(255,107,107,0.06);
+}
+
+/* Quiz cards */
+.quiz-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,250,255,0.98));
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 18px 30px rgba(120,110,160,0.06);
+  border: 1px solid rgba(0,0,0,0.03);
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.quiz-card-title {
+  margin: 0 0 8px 0;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+}
+
+.quiz-card-desc {
+  margin: 0 0 10px 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-top: 8px;
+}
+
+/* small badge showing number of questions on a card */
+.quiz-count {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 3;
+  display: inline-block;
+  padding: 0; /* no pill background, just text */
+  font-weight: 300; /* thin */
+  font-size: 0.85rem;
+  color: var(--muted); /* subtle gray */
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+}
+
+.quiz-count::before {
+  content: none;
+}
+
+@media (max-width: 520px) {
+  .quiz-count {
+    top: 8px;
+    right: 8px;
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+  .createquizbutton {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+/* Cartoon-ish create button */
+.createquizbutton {
+  /* match the logo gradient: #b892ff -> #ff96d1 */
+  background: linear-gradient(90deg, #b892ff 0%, #ff96d1 100%);
+  color: #ffffff;
+  padding: 11px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-family: var(--font-body);
+  box-shadow: 0 10px 26px rgba(187,140,255,0.14);
+  transform: translateY(0);
+  transition: transform .12s ease, box-shadow .12s ease;
+  border: 0;
+}
+
+.createquizbutton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 38px rgba(255,150,200,0.18);
+}
+
+/* outlined button variant: transparent background + gradient border */
+.btn-outline {
+  background: transparent;
+  padding: 10px 16px;
+  border-radius: 12px;
+  position: relative;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  display: inline-block;
+  border-radius: 12px; /* rounded frame */
+  padding: 2px; /* thickness of the gradient frame */
+  background: linear-gradient(90deg, #b892ff 0%, #ff96d1 100%);
+  overflow: hidden; /* ensure rounded corners clip the frame */
+}
+
+.btn-outline:hover {
+  transform: translateY(-3px);
+}
+
+/* inner area that visually appears transparent (we use the base page color to mask the frame) */
+.btn-outline .inner {
+  display: inline-block;
+  padding: 11px 18px; /* match filled button sizing */
+  border-radius: 10px; /* slightly smaller to reveal the frame */
+  background: var(--bg-1); /* neutral fill so the frame looks like an outline */
+}
+
+/* gradient text inside the inner element */
+.btn-outline .text-gradient {
+  background: linear-gradient(90deg, #b892ff 0%, #ff96d1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+  font-weight: 700;
+}
+
+/* gradient text for outlined buttons (ensure cross-browser visibility) */
+.btn-outline .text-gradient {
+  background: linear-gradient(90deg, #b892ff 0%, #ff96d1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent; /* ensures gradient text on WebKit */
+  color: transparent;
+  display: inline-block;
+  font-weight: 700;
+}
+
+/* Create/edit form styles */
+.form-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,255,0.85));
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(8,20,40,0.08);
+  border: 1px solid rgba(0,0,0,0.04);
+  width: 100%;
+}
+
+.form-card h2 {
+  margin: 0 0 8px 0;
+  font-family: 'Baloo 2', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.field {
+  margin-bottom: 12px;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.field input[type="text"],
+.field textarea {
+  resize: none;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.field textarea {
+  min-height: 200px;
+  height: 100%;
+}
+
+.questions-area {
+  margin-top: 8px;
+}
+
+.q-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.question-item {
+  padding: 14px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.78);
+  border: 1px dashed rgba(0,0,0,0.03);
+}
+
+.question-item label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.question-text {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.08);
+  margin-bottom: 10px;
+  font-family: var(--font-body);
+}
+
+.options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.option-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.option-row input[type="text"] {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.correct-radio {
+  width: 16px;
+  height: 16px;
+}
+
+.control-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  align-items: center;
+}
+
+.btn.small {
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.question-item .btn.danger {
+  background: #ffefef;
+  color: #b33;
+  border: 1px solid rgba(180,20,20,0.08);
+  margin-top: 12px;
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+

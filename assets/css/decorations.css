@@ -1,0 +1,161 @@
+/* ---------------- decorative background & floating blobs ---------------- */
+
+/* великі декоративні блоби та легка текстура для фонового шарування */
+body {
+  /* додаємо пастельні шари для приємного мультяшного фону */
+  background:
+    radial-gradient(1000px 500px at 8% 10%, rgba(255,214,176,0.16), transparent 12%),
+    radial-gradient(900px 480px at 92% 88%, rgba(176,220,255,0.14), transparent 14%),
+    linear-gradient(180deg, rgba(255,250,245,0.9), rgba(250,245,255,0.9)),
+    var(--bg-1);
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+/* контейнер повинен бути relative, щоб псевдоелементи позиціювались відносно нього */
+.quiz-container {
+  position: relative;
+  overflow: visible; /* дозволяємо декоративним елементам виходити за межі */
+}
+
+/* великі м'які блоби (дві форми, псевдоелементи) */
+.quiz-container::before,
+.quiz-container::after {
+  content: "";
+  position: absolute;
+  z-index: 0; /* позаду контенту */
+  filter: blur(28px);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* лівий верхній блоб (м'ятно-блакитний) */
+.quiz-container::before {
+  width: 520px;
+  height: 520px;
+  left: -220px;
+  top: -220px;
+  background: radial-gradient(circle at 30% 30%, rgba(255,195,160,0.26), rgba(255,160,200,0.16) 42%, transparent 62%);
+  border-radius: 50%;
+  transform: rotate(-14deg);
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+/* правий нижній блоб (лавандово-кораловий) */
+.quiz-container::after {
+  width: 440px;
+  height: 440px;
+  right: -200px;
+  bottom: -200px;
+  background: radial-gradient(circle at 65% 35%, rgba(160,190,255,0.18), rgba(200,160,255,0.14) 46%, transparent 66%);
+  border-radius: 50%;
+  transform: rotate(8deg);
+  animation: floatSlowReverse 9s ease-in-out infinite;
+}
+
+/* малі плаваючі бульбашки — створюємо їх через псевдоелементи на body (2 штуки) */
+body::before,
+body::after,
+.quiz-container .bubble {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  border-radius: 999px;
+  opacity: 0.85;
+  pointer-events: none;
+  transition: transform 0.6s linear;
+}
+
+/* два фіксованих бульбашки на body */
+body::before {
+  width: 120px;
+  height: 120px;
+  left: 6%;
+  top: 12%;
+  background: linear-gradient(135deg, rgba(255,180,150,0.18), rgba(200,180,255,0.12));
+  filter: blur(6px);
+  animation: floatTiny 6s ease-in-out infinite;
+}
+
+body::after {
+  width: 84px;
+  height: 84px;
+  right: 7%;
+  top: 20%;
+  background: linear-gradient(135deg, rgba(170,200,255,0.16), rgba(255,170,200,0.12));
+  filter: blur(5px);
+  animation: floatTinyReverse 5.5s ease-in-out infinite;
+}
+
+/* (опціонально) додати кілька видимих/колірних декоративних точок у контейнері */
+.quiz-container .bubble {
+  width: 36px;
+  height: 36px;
+  right: 18%;
+  top: 62%;
+  background: linear-gradient(135deg, rgba(167,139,250,0.14), rgba(76,201,240,0.10));
+  transform: translateY(0);
+  animation: floatTiny 7s ease-in-out infinite;
+  z-index: 0;
+}
+
+/* анімації плавного плаваючого руху */
+@keyframes floatSlow {
+  0% { transform: translateY(0) rotate(-12deg); }
+  50% { transform: translateY(-16px) rotate(-6deg); }
+  100% { transform: translateY(0) rotate(-12deg); }
+}
+
+@keyframes floatSlowReverse {
+  0% { transform: translateY(0) rotate(8deg); }
+  50% { transform: translateY(14px) rotate(2deg); }
+  100% { transform: translateY(0) rotate(8deg); }
+}
+
+@keyframes floatTiny {
+  0% { transform: translateY(0) scale(1); opacity: 0.9; }
+  50% { transform: translateY(-10px) scale(1.05); opacity: 0.95; }
+  100% { transform: translateY(0) scale(1); opacity: 0.9; }
+}
+
+@keyframes floatTinyReverse {
+  0% { transform: translateY(0) scale(1); opacity: 0.9; }
+  50% { transform: translateY(8px) scale(0.98); opacity: 0.95; }
+  100% { transform: translateY(0) scale(1); opacity: 0.9; }
+}
+
+/* Забезпечити, що контент (заголовок і кнопки) знаходяться над декоративними елементами */
+.quiz-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Мобільні корекції — зменшуємо розміри «блобів» */
+@media (max-width: 900px) {
+  .quiz-container::before {
+    width: 320px;
+    height: 320px;
+    left: -160px;
+    top: -160px;
+    filter: blur(28px);
+    opacity: 0.85;
+  }
+  .quiz-container::after {
+    width: 260px;
+    height: 260px;
+    right: -110px;
+    bottom: -110px;
+    filter: blur(24px);
+    opacity: 0.85;
+  }
+}
+
+@media (max-width: 520px) {
+  body::before, body::after {
+    display: none;
+  }
+  .quiz-container .bubble {
+    display: none;
+  }
+}
+
