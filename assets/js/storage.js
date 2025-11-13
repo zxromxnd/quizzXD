@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const topicsRoot = document.getElementById('topics-root');
   if (!topicsRoot) return;
 
-  fetch('tests.json')
+  fetch('../data/tests.json')
     .then(res => res.json())
     .then(data => {
       topicsRoot.innerHTML = '';
